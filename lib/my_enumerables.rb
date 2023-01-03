@@ -83,10 +83,19 @@ class Array
     results
   end
 
+  def my_inject(accumulator)
+    return unless block_given?
+    self.my_each do |i|
+      p "acc: #{accumulator} obj: #{i}"
+      accumulator = yield accumulator, i
+    end
+    accumulator
+  end
 end
 
 test_arr = [1,-2,33,4,50]
-p test_arr.my_map { |i| i * 2}
+x = test_arr.my_inject(2) { |sum, value| sum + value }
+p x 
 
 
 
